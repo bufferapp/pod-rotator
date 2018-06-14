@@ -1,5 +1,6 @@
 import argparse
 import subprocess
+import rotater
 
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(description="A Tool to Rotate Pods")
@@ -10,6 +11,6 @@ if __name__ == "__main__":
     #c = python('rotater.py {}'.format(' '.join(args.remaining)))
     #print(c)
     if args.job == "rotate":
-        subprocess.call(['python', 'rotater.py']+args.remaining)
+        rotater.delete_pods_for_given_deployment(args.remaining)
     elif args.job == "find-secrets":
         print("not yet implemented. Coming soon")

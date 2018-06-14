@@ -27,19 +27,20 @@ def deletePod(namespace, pods, sleep_timer):
     for pod in pods:
         try:
             kube_delete_op_result = kubectl('delete', 'pod', '--namespace', namespace, pod)
-            print(kube_delete_op_result.stdout)
+            print(kube_delete_op_result.stdout.decode('utf-8'))
             time.sleep(sleep_timer)
         except:
             print("Failed to delete {}".format(pod))
 
     
-if __name__ == "__main__":
+def delete_pods_for_given_deployment(args_to_parse):
     parser=argparse.ArgumentParser()
     parser.add_argument('--namespace', dest='namespace', action='store', help='Namespace to work in (use all to signal all namespaces)', default="default")
     parser.add_argument('--deployments', dest='deployments', action='store', nargs='+', required=True, help='Use all to signal all deployments for the namespace')
     parser.add_argument('--sleep', dest='sleep_timer', action='store', type=int, default=5, help='Time in seconds to keep between deleting each pod. Defaults to 5')
-    args = parser.parse_args()
+    args = parser.parse_args(args_to_parse)
     if args.deployments != ["all"]:
+        print("Attempting to grab deployment details")
         try:
             deployments_as_yaml = yaml.load(kubectl("get", "deployments", "--namespace", args.namespace, args.deployments, "-o", "yaml").stdout)
             if 'items' not in deployments_as_yaml:
@@ -56,7 +57,7 @@ if __name__ == "__main__":
         except:
             print("oh nop. all didnt work")
             sys.exit(1)
-
+    print("Downloaded deployment information")
     deployments_with_labels = getDeploymentLabels(deployments)
     pods_to_delete = {}
     for deployment_name in deployments_with_labels:
