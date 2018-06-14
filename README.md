@@ -1,4 +1,4 @@
-#Kubernetes Pod Rotater
+# Kubernetes Pod Rotater
 
 A tiny utility to help do a rolling refresh of pods across select deployments.
 
