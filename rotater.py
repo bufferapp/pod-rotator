@@ -16,14 +16,17 @@ def getPods(namespace, deployment_name, deployment_labels):
     for deployment_label in deployment_labels:
         selectors.append('{}={}'.format(deployment_label, deployment_labels[deployment_label]))
     label_string=','.join(selectors)
-    pods_as_yaml=yaml.load(kubectl("get", "pods", "--namespace", namespace, "-l", label_string, "-o", "yaml").stdout)['items']
+    pods_as_yaml = {}
+    try:
+        pods_as_yaml=yaml.load(kubectl("get", "pods", "--namespace", namespace, "-l", label_string, "-o", "yaml").stdout)['items']
+    except:
+        print("Couldn't retrieve pods for the deployment {}".format(deployment_name))
     return pods_as_yaml
 
 def deletePod(namespace, pods, sleep_timer):
     for pod in pods:
         try:
             kube_delete_op_result = kubectl('delete', 'pod', '--namespace', namespace, pod)
-            #print("kubectl delete pod --namespace {} {}".format(namespace, pod))
             print(kube_delete_op_result.stdout)
             time.sleep(sleep_timer)
         except:
