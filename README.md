@@ -31,5 +31,5 @@ Compatibility has been tested only with `python3`
 * Allow reading a deployment list from a file
 * Have a failure resistance mechanism built in -- use a log to track progress 
 * Make this `pip` installable
-* -Make `rotater.py` be runnable via a function call instead of `subprocess`- - DONE
-* -Add threading support for large deployments- - DONE
+* ~Make `rotater.py` be runnable via a function call instead of `subprocess`~ - DONE
+* ~Add threading support for large deployments~ - DONE
