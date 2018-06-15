@@ -3,3 +3,4 @@ lib/
 pip-selfcheck.json
 *-workspace
 .vscode/
+__pycache__/
