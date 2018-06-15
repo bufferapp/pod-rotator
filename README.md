@@ -19,7 +19,8 @@ Compatibility has been tested only with `python3`
 `python3 rotate-pods.py rotate` takes the following params:
 
 * `--namespace`: Defaults to `default`. Can only input 1 namespace
-* `--deployments`: **Required** input. Space separated list of deployments to delete pods from. If you wish to rotate pods for all deployments in the namespace, use **`all`** as the value.
+* `--deployments`: **Required** (if not running `--restart`) input. Space separated list of deployments to delete pods from. If you wish to rotate pods for all deployments in the namespace, use **`all`** as the value.
+* `--restart`: Used if the previous attempt to rotate pods fails in between. Usually because the net drops. This restarts from the point where it stopped so that you don't rotate already rotated pods again.
 * `--sleep`: **Optional**. Number of seconds to sleep after each pod deletion request completes. _Defaults to 5_
 * `--threaded`: **Experimental**. Leverages threads to delete pods of deployments in parallel
   * Note that this does NOT delete pods of the same deployment in parallel. If there are 2 or more deployments specified, it deletes pods from each deployment in parallel.
@@ -29,7 +30,7 @@ Compatibility has been tested only with `python3`
 ## Todo
 
 * Allow reading a deployment list from a file
-* Have a failure resistance mechanism built in -- use a log to track progress 
+* ~Have a failure resistance mechanism built in -- use a log to track progress~ - DONE
 * Make this `pip` installable
 * ~Make `rotater.py` be runnable via a function call instead of `subprocess`~ - DONE
 * ~Add threading support for large deployments~ - DONE
