@@ -1,7 +1,6 @@
 import argparse
 import subprocess
 import rotater
-import mptest
 
 if __name__ == "__main__":
     parser=argparse.ArgumentParser(description="A Tool to Rotate Pods")
