@@ -4,7 +4,7 @@ A tiny utility to help do a rolling refresh of pods across select deployments.
 
 ## How to use
 
-`python3 rotater.py rotate --namespace <namespace of choice> --deployments list of space separated deployments --sleep <number of seconds to sleep after each pod is deleted>`
+`python3 rotate-pods.py rotate --namespace <namespace of choice> --deployments list of space separated deployments --sleep <number of seconds to sleep after each pod is deleted>`
 
 Compatibility has been tested only with `python3`
 
@@ -16,7 +16,7 @@ Compatibility has been tested only with `python3`
 
 ## Description of commands
 
-`python3 rotater.py rotate` takes the following params:
+`python3 rotate-pods.py rotate` takes the following params:
 
 * `--namespace`: Defaults to `default`. Can only input 1 namespace
 * `--deployments`: **Required** input. Space separated list of deployments to delete pods from. If you wish to rotate pods for all deployments in the namespace, use **`all`** as the value.
