@@ -6,6 +6,7 @@ directly
 """
 import argparse
 import rotater
+import secret_finder
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="A Tool to Rotate Pods")
@@ -15,4 +16,4 @@ if __name__ == "__main__":
     if args.job == "rotate":
         rotater.delete_pods_for_given_deployment(args.remaining)
     elif args.job == "find-secrets":
-        print("not yet implemented. Coming soon")
+        secret_finder.find_deployments_using_secret(args.remaining)
